@@ -5,7 +5,7 @@
 ---
 
 ## Overview
-This repository contains the supporting code for the dissertation *High-Resolution Water Segmentation for Salmon Habitat*. The project evaluates three methods for detecting water in high-resolution WorldView-3 multispectral imagery (16-bit, 4-band R/G/B/NIR1, 512×512 chips) across 64 scenes from salmon river habitats in the Pacific Northwest.
+This repository contains the supporting code for the dissertation *High-Resolution Water Segmentation for Salmon Habitat*. The project evaluates three methods for detecting water in high-resolution WorldView-2 and WorldView-3 multispectral imagery (16-bit, 4-band R/G/B/NIR1, 512×512 chips) across 64 scenes from salmon river habitats in the Pacific Northwest.
 
 **Methods evaluated:**
 - NDWI (Normalised Difference Water Index) — spectral baseline
