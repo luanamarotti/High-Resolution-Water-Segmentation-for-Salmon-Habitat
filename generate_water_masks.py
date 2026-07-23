@@ -4,8 +4,10 @@ Generate dummy water/no-water mask images for test chips.
 NOTE: Already run. 33,516 dummy mask files saved to results/dummy_masks/.
 Do not re-run unless you need to regenerate the masks from scratch.
 
-For each test chip, 7 mask variants are created at the following water pixel ratios:
+For each test chip, 7 mask variants are created at the following target water pixel ratios:
     Y = 0%, 20%, 40%, 50%, 60%, 80%, 100%
+For fractional targets (20%–80%), the actual water fraction is approximately the
+target ratio due to per-pixel Bernoulli sampling (0% and 100% are exact).
 Used as sanity checks to verify the metrics pipeline is working correctly.
 
 Expected behaviour:
@@ -13,8 +15,10 @@ Expected behaviour:
     100% target → F1 = 1.000 only if ground truth is also all-water (rarely)
     Random masks should produce metrics near the water fraction baseline.
 
-Output filenames follow the pattern:
-    <original_stem>_mask_Y<percent>.tif
+Output layout:
+    Each input chip is written unchanged in name into a per-ratio subfolder:
+        results/dummy_masks/water_<pct>pct/<original_chip_name>.tif
+    (e.g. results/dummy_masks/water_040pct/<chip>.tif for the 40% ratio)
 
 Usage:
     python generate_water_masks.py
@@ -24,6 +28,7 @@ Output folders:
     results/dummy_masks/water_020pct/
     ...etc
 """
+import os
 import json
 import numpy as np
 import rasterio
@@ -31,7 +36,11 @@ from pathlib import Path
 from tqdm import tqdm
 
 # ── Paths ──
-BASE_DIR        = Path('/mnt/batch/tasks/shared/LS_root/mounts/clusters/v-lmarotti1/code/Users/v-lmarotti/OmniWaterMask')
+# Override by setting the BASE_DIR environment variable
+BASE_DIR        = Path(os.environ.get(
+    'BASE_DIR',
+    '/mnt/batch/tasks/shared/LS_root/mounts/clusters/v-lmarotti1/code/Users/v-lmarotti/OmniWaterMask'
+))
 CHIPS_DIR       = BASE_DIR / 'images/chips_images/images'
 OUTPUT_DIR      = BASE_DIR / 'results/dummy_masks'
 TEST_CHIPS_JSON = BASE_DIR / 'results/unet_training/test_chips.json'
