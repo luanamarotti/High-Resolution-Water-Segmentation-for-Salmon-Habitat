@@ -22,7 +22,7 @@ The dataset is not included in this zip. All scripts expect the following direct
 ```
 BASE_DIR/
 ├── images/
-│   ├── chips_images/images/     # 17,445 .tif chips (4-band, 512×512)
+│   ├── chips_images/images/     # 17,445 .tif chips (8-band, 4 used for modelling, 512×512)
 │   └── chips_masks/masks/       # Binary water masks (same filenames)
 └── data/
     └── nhd/
@@ -68,7 +68,7 @@ supporting_material/
 ├── dataset_analysis.ipynb                 # Temporal, spatial, seasonal and water fraction analysis
 │
 ├── generate_water_masks.py                # Generates dummy mask sets for sanity checks
-└── generate_figures.ipynb                 # Generates training curves and comparison bar chart
+└── generate_figures.ipynb                 # Generates all dissertation figures (training curves, comparison, pipeline, map, timeline, per-scene scatter, qualitative)
 ```
 
 ---
@@ -120,7 +120,7 @@ Run all cells in `comparison_all_final.ipynb` in order. This notebook:
 > ⚠️ Cell 1b generates NDWI binary masks at t=0.35 from raw chips (~25 min, runs once). This must complete before Cell 2. The fold reconstruction uses sklearn KFold with shuffle=True, random_state=42, preceded by random.seed(42) + random.shuffle — this must match the training fold reconstruction exactly.
 
 ### Step 8 — Figures
-Run all cells in `generate_figures.ipynb` to regenerate training curves and the comparison bar chart. Figures are saved to `results/dissertation_figures/`.
+Run all cells in `generate_figures.ipynb` to regenerate all dissertation figures (training curves, method comparison, pipeline diagram, geographic map, acquisition timeline, per-scene scatter, and qualitative predictions panel). Figures are saved to `results/dissertation_figures/`.
 
 ---
 
