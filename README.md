@@ -5,7 +5,7 @@
 ---
 
 ## Overview
-This repository contains the supporting code for the dissertation *High-Resolution Water Segmentation for Salmon Habitat*. The project evaluates three methods for detecting water in high-resolution WorldView-2 and WorldView-3 multispectral imagery (16-bit, 4-band R/G/B/NIR1, 512×512 chips) across 64 scenes from salmon river habitats in the Pacific Northwest.
+This repository contains the supporting code for the dissertation *High-Resolution Water Segmentation for Salmon Habitat*. The project evaluates three methods for detecting water in high-resolution WorldView-2 and WorldView-3 multispectral imagery (8-band, 4 used for modelling: R/G/B/NIR1, 512×512 chips) across 64 scenes from salmon river habitats in the Pacific Northwest.
 
 **Methods evaluated:**
 - NDWI (Normalised Difference Water Index) — spectral baseline
@@ -103,7 +103,7 @@ In `unet_training_final.ipynb`, run cells in this order:
 
 ### Step 6 — U-Net evaluation (best model + ensemble)
 Run all cells in `unet_diagnostic_final.ipynb` in order. This notebook:
-- Loads the global best fold checkpoint (`best_model.pth`) and all 5 fold checkpoints (`fold1_best.pth` through `fold5_best.pth`)
+- Loads the global best fold checkpoint (`best_model.pth` = `fold5_best.pth`) and all 5 fold checkpoints (`fold1_best.pth` through `fold5_best.pth`)
 - Runs inference on all 4,788 test chips and saves probability maps for both strategies
 - **Best single fold:** threshold selected via sweep on fold 5 validation scenes (never seen during fold 5 training)
 - **Ensemble (majority vote):** each fold model selects its own threshold on its own validation scenes; binary predictions are combined by majority vote (3/5 models predict water)
@@ -136,6 +136,8 @@ The `unet_stability_experiments_1.ipynb` and `unet_stability_experiments_2.ipynb
 - **Round 3** — U-Net model ablation (model+vector, model+vector+NDWI, model+NDWI only)
 - **Round 4** — vector data quality assessment (OSM/NHD rasterised vs ground truth)
 
+**Overall finding:** all OWM configurations, including the best vector source, were outperformed by a manually-thresholded NDWI baseline and by the fine-tuned U-Net; OWM was therefore not used as the primary method.
+
 **NOTE: Do not re-run** — results saved to `results/owm_experiments/`. This notebook was run on a separate 31-scene development set, not the final 13 test scenes used in `owm_scenes_final.ipynb`.
 
 ---
@@ -151,7 +153,7 @@ results/
 │
 ├── unet_training_v3/
 │   ├── kfold/
-│   │   ├── best_model.pth           # Global best fold checkpoint (used by unet_diagnostic_final)
+│   │   ├── best_model.pth           # Global best fold checkpoint (= fold5_best.pth; used by unet_diagnostic_final)
 │   │   ├── fold{N}_best.pth         # Per-fold checkpoints (N = 1–5)
 │   │   └── fold{N}_history.csv      # Per-fold training curves
 │   ├── sweep_bs64_test/             # Stability experiment outputs
@@ -163,7 +165,7 @@ results/
 │   ├── prob_maps_best/              # Raw sigmoid probabilities — best single fold
 │   ├── pred_maps_ensemble_majority/ # Binary predictions — majority vote ensemble
 │   ├── fold{N}_thresh.json          # Per-fold optimal thresholds
-│   └── final_summary.csv            # Per-chip metrics for all test chips (used by comparison_all_final)
+│   └── final_summary.csv            # Method-level summary table (best model, ensemble, NDWI, OWM) (used by comparison_all_final)
 │
 ├── ndwi_chips/
 │   └── masks_t0.35/                 # NDWI binary masks at t=0.35
