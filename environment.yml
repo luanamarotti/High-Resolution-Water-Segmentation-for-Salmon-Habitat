@@ -1,0 +1,29 @@
+name: owm
+channels:
+  - conda-forge
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.12
+  - pytorch>=2.0
+  - torchvision
+  - pytorch-cuda=12.1
+  - numpy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - rasterio
+  - geopandas
+  - shapely
+  - contextily
+  - pillow
+  - requests
+  - tqdm
+  - ipykernel
+  - jupyterlab
+  - pip
+  - pip:
+    - segmentation-models-pytorch
+    - omniwatermask
+    - opencv-python

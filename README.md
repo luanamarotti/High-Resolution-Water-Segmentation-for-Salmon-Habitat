@@ -38,6 +38,13 @@ Normalisation statistics and the test chip list are saved to `results/unet_train
 ## Environment
 All code was developed and run on Microsoft Azure ML with an NVIDIA H100 NVL GPU (100 GB VRAM) under the `owm` conda environment.
 
+To recreate the environment locally:
+
+```bash
+conda env create -f environment.yml
+conda activate owm
+```
+
 **Key dependencies:**
 - Python 3.12
 - PyTorch 2.x (CUDA)
@@ -46,6 +53,7 @@ All code was developed and run on Microsoft Azure ML with an NVIDIA H100 NVL GPU
 - scikit-learn
 - omniwatermask
 - opencv-python (cv2)
+- geopandas, contextily, shapely
 - pandas, numpy, matplotlib, tqdm
 
 ---
