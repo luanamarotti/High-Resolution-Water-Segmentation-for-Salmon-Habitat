@@ -37,7 +37,7 @@ Reproducibility:
 
 Cross-file dependency:
     WATER_RATIOS below must stay in sync with the WATER_RATIOS list in
-    comparison_all_final.ipynb (cell 5, currently [0, 20, 40, 50, 60, 80, 100]).
+    comparison_all_final.ipynb (cell 6, currently [0, 20, 40, 50, 60, 80, 100]).
     Adding a ratio here without updating the notebook will silently exclude the
     new variant from the pipeline comparison.
 """

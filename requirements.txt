@@ -1,0 +1,21 @@
+# Best-effort requirements derived from environment.yml; needs verification.
+# Conda-specific solver/channel details (for example pytorch-cuda=12.1) are not
+# fully representable here, so keep using environment.yml as the source of truth.
+torch>=2.0
+torchvision
+numpy
+pandas
+matplotlib
+scikit-learn
+rasterio
+geopandas
+shapely
+contextily
+Pillow
+requests
+tqdm
+ipykernel
+jupyterlab
+segmentation-models-pytorch
+omniwatermask
+opencv-python
