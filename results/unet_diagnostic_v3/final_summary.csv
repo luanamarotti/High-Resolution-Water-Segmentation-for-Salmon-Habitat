@@ -1,0 +1,5 @@
+method,threshold,micro_f1,precision,recall,threshold_source
+U-Net best model,0.25,0.8413,0.7995,0.8877,fold 5 val scenes
+U-Net ensemble (majority vote),"[0.8, 0.65, 0.15, 0.8, 0.25]",0.8629,0.8392,0.8879,per-fold val scenes (majority vote)
+"NDWI (t=0.35, dev)",0.35,0.523,0.376,0.859,51 dev scenes
+OWM,,0.344,0.209,0.966,OSM/NHD calibration
