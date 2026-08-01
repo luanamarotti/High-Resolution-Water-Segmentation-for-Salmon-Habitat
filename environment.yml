@@ -9,7 +9,7 @@ dependencies:
   - pytorch=2.3.0
   - torchvision=0.18.0
   - pytorch-cuda=12.1
-  - numpy
+  - numpy<2
   - pandas
   - matplotlib
   - scikit-learn
