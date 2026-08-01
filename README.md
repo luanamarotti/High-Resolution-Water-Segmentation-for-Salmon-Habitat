@@ -16,6 +16,22 @@ This repository contains the supporting code for the dissertation *High-Resoluti
 
 ---
 
+## Results
+Pooled micro F1 on the 4,788 held-out test chips:
+
+| Method | Micro F1 | Precision | Recall |
+|--------|:-------:|:---------:|:------:|
+| **U-Net ensemble (majority vote)** | **0.8629** | 0.8392 | 0.8879 |
+| U-Net best model (t=0.25) | 0.8413 | 0.7995 | 0.8877 |
+| NDWI (t=0.35) | 0.5231 | 0.3760 | 0.8589 |
+| OWM | 0.3440 | 0.2093 | 0.9662 |
+| Dummy 100% water (baseline) | 0.0472 | 0.0242 | 1.0000 |
+| Dummy 0% water (baseline) | 0.0000 | 0.0000 | 0.0000 |
+
+The dummy baselines are metric-pipeline sanity checks (see `generate_water_masks.py`), not competing methods.
+
+---
+
 ## Data
 The dataset is not included in this repository. All scripts expect the following directory structure under a base directory (`BASE_DIR`):
 
@@ -212,3 +228,8 @@ results/
 - U-Net best model probability maps are saved to `results/unet_diagnostic_v3/prob_maps_best/`.
 - U-Net ensemble majority vote binary predictions are saved to `results/unet_diagnostic_v3/pred_maps_ensemble_majority/`.
 - NDWI binary masks at t=0.35 are saved to `results/ndwi_chips/masks_t0.35/`.
+
+---
+
+## License
+This project is released under the MIT License. See [`LICENSE`](LICENSE) for details.
