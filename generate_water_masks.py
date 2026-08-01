@@ -37,7 +37,7 @@ Reproducibility:
 
 Cross-file dependency:
     WATER_RATIOS below must stay in sync with the WATER_RATIOS list in
-    comparison_all_final.ipynb (cell 6, currently [0, 20, 40, 50, 60, 80, 100]).
+    comparison_all_final.ipynb (currently [0, 20, 40, 50, 60, 80, 100]).
     Adding a ratio here without updating the notebook will silently exclude the
     new variant from the pipeline comparison.
 """
@@ -59,7 +59,7 @@ logging.basicConfig(level=logging.INFO, format='%(message)s')
 log = logging.getLogger(__name__)
 
 # Water ratios to generate.
-# IMPORTANT: Keep in sync with WATER_RATIOS in comparison_all_final.ipynb (cell 5).
+# IMPORTANT: Keep in sync with WATER_RATIOS in comparison_all_final.ipynb.
 WATER_RATIOS = [0.0, 0.20, 0.40, 0.50, 0.60, 0.80, 1.0]
 SEED_BASE    = 42
 _MAX_SEED    = 2**31
