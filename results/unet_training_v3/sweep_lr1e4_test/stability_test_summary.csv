@@ -1,0 +1,2 @@
+config,lr,wd,loss,bs,best_val_loss,best_val_f1
+Ctest_lr1e4_focal_dice,0.0001,0.001,focal_dice,64,0.0488,0.8916
