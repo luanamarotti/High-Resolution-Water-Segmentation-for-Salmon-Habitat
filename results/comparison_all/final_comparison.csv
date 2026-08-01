@@ -1,0 +1,7 @@
+Method,Micro F1,Precision,Recall,IoU
+U-Net ensemble (t=majority vote),0.8629,0.8392,0.8879,
+U-Net best model (t=0.25),0.8413,0.7995,0.8877,
+NDWI (t=0.35),0.5231,0.376,0.8589,0.3542
+OWM,0.344,0.2093,0.9662,0.2077
+Dummy 100% water,0.0472,0.0242,1.0,0.0242
+Dummy 0% water,0.0,0.0,0.0,0.0
