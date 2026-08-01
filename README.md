@@ -5,7 +5,7 @@
 ---
 
 ## Overview
-This repository contains the supporting code for the dissertation *High-Resolution Water Segmentation for Salmon Habitat*. The project evaluates three methods for detecting water in high-resolution WorldView-2 and WorldView-3 multispectral imagery (16-bit, 4-band R/G/B/NIR1, 512×512 chips) across 64 scenes from salmon river habitats in the Pacific Northwest.
+This repository contains the supporting code for the dissertation *High-Resolution Water Segmentation for Salmon Habitat*. The project evaluates three methods for detecting water in high-resolution imagery.
 
 **Methods evaluated:**
 - NDWI (Normalised Difference Water Index) — spectral baseline
@@ -29,7 +29,7 @@ BASE_DIR/
         └── NHD_flowlines.geojson  # NHD hydrological network (used by OWM)
 ```
 
-`BASE_DIR` is read from the `BASE_DIR` environment variable in all notebooks and scripts (with the Azure ML path as the hardcoded fallback). Set the variable before launching Jupyter — e.g. `export BASE_DIR=/path/to/project` — or update Cell 1 of each notebook directly.
+`BASE_DIR` is read from the `BASE_DIR` environment variable in all notebooks and scripts (with the Azure ML path as the hardcoded fallback). Set the variable before launching Jupyter — e.g. `export BASE_DIR=/path/to/project`.
 
 Normalisation statistics and the test chip list are saved to `results/unet_training/` on first run and reloaded automatically on subsequent runs — do not delete these files.
 
@@ -45,9 +45,17 @@ conda env create -f environment.yml
 conda activate owm
 ```
 
+Alternatively, using pip (Python 3.12 required):
+
+```bash
+pip install -r requirements.txt
+# For GPU/CUDA builds, install torch via the official index:
+#   pip install torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cu121
+```
+
 **Key dependencies:**
 - Python 3.12
-- PyTorch 2.x (CUDA)
+- PyTorch 2.3.0 (CUDA 12.1)
 - segmentation-models-pytorch
 - rasterio
 - scikit-learn
@@ -84,7 +92,7 @@ conda activate owm
 ## Reproducing Results
 
 ### Step 1 — Scene-level split and normalisation (run once)
-Open `unet_training_final.ipynb` and run **cells 1–3** in order. These establish the train/val/test split at scene level and compute normalisation statistics from the training set. Results are saved to `results/unet_training/` and do not need to be re-run.
+Open `unet_training_final.ipynb` and run **cells 1–3** in order. These establish the train/val/test split at scene level and compute normalisation statistics from the training set.
 
 > ⚠️ Do not re-run cells 1–3 after the split is established — this would change the random seed and invalidate the test set.
 
@@ -97,7 +105,7 @@ Run all cells in `owm_scenes_final.ipynb`. Reconstructs each test scene from its
 > ⚠️ OWM inference is slow (~30 min per scene). Results are cached — cells skip scenes that already have predictions.
 
 ### Step 4 — Dataset analysis
-Run all cells in `dataset_analysis.ipynb`. Produces temporal, spatial, seasonal, and water fraction figures for the train/val vs test split. Results are saved to `results/dataset_analysis/`. Must be run before Step 6 (Cell 8 of `unet_diagnostic_final.ipynb` depends on `scene_metadata.csv`).
+Run all cells in `dataset_analysis.ipynb`. Produces temporal, spatial, seasonal, and water fraction figures for the train/val vs test split. Results are saved to `results/dataset_analysis/`.
 
 ### Step 5 — U-Net training (Model 3 only — Models 1 and 2 are historical)
 In `unet_training_final.ipynb`, run cells in this order:
@@ -125,15 +133,15 @@ Run all cells in `comparison_all_final.ipynb` in order. This notebook:
 - Loads U-Net results from `final_summary.csv`
 - Produces the final comparison table and figures across all methods: NDWI, OWM, U-Net best model, and U-Net ensemble (majority vote)
 
-> ⚠️ Cell 1b generates NDWI binary masks at t=0.35 from raw chips (~25 min, runs once). This must complete before Cell 2. The fold reconstruction uses sklearn KFold with shuffle=True, random_state=42, preceded by random.seed(42) + random.shuffle — this must match the training fold reconstruction exactly.
+> ⚠️ Cell 1b generates NDWI binary masks at t=0.35 from raw chips (~25 min, runs once). This must complete before Cell 2. The fold reconstruction uses sklearn KFold with shuffle=True, random_state=42.
 
 ### Step 8 — Figures
-Run all cells in `generate_figures.ipynb` to regenerate all dissertation figures (training curves, method comparison, pipeline diagram, geographic map, acquisition timeline, per-scene scatter, and qualitative predictions panel). Figures are saved to `results/dissertation_figures/`.
+Run all cells in `generate_figures.ipynb` to regenerate all dissertation figures (training curves, method comparison, pipeline diagram, geographic map, acquisition timeline, per-scene scatter, and qualitative examples).
 
 ---
 
 ## Stability Experiments
-The `unet_stability_experiments_1.ipynb` and `unet_stability_experiments_2.ipynb` notebooks document intermediate experiments run before the final hyperparameter sweep. These are retained as a historical record and should not be re-run. All results are saved to `results/unet_training_v3/sweep_bs64_test/`, `sweep_lowwd_test/`, `sweep_bce_test/`, and `sweep_lr1e4_test/`.
+The `unet_stability_experiments_1.ipynb` and `unet_stability_experiments_2.ipynb` notebooks document intermediate experiments run before the final hyperparameter sweep. These are retained as a historical record and are not required to reproduce the final results.
 
 ---
 
