@@ -1,9 +1,13 @@
-# Best-effort requirements derived from environment.yml; needs verification.
-# Conda-specific solver/channel details (for example pytorch-cuda=12.1) are not
-# fully representable here, so keep using environment.yml as the source of truth.
-torch>=2.0
-torchvision
-numpy
+# Best-effort requirements derived from environment.yml; environment.yml remains
+# the source of truth. Conda-specific solver/channel details (e.g. pytorch-cuda=12.1)
+# are not fully representable here. Requires Python 3.12.
+#
+# NOTE: For GPU/CUDA builds, install torch/torchvision via the official index, e.g.:
+#   pip install torch==2.3.0 torchvision==0.18.0 --index-url https://download.pytorch.org/whl/cu121
+
+torch==2.3.0
+torchvision==0.18.0
+numpy<2
 pandas
 matplotlib
 scikit-learn
