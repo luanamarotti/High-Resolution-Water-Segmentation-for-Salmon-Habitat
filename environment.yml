@@ -6,8 +6,8 @@ channels:
   - defaults
 dependencies:
   - python=3.12
-  - pytorch>=2.0
-  - torchvision
+  - pytorch=2.3.0
+  - torchvision=0.18.0
   - pytorch-cuda=12.1
   - numpy
   - pandas
@@ -20,10 +20,10 @@ dependencies:
   - pillow
   - requests
   - tqdm
+  - opencv
   - ipykernel
   - jupyterlab
   - pip
   - pip:
     - segmentation-models-pytorch
     - omniwatermask
-    - opencv-python
