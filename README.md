@@ -29,7 +29,7 @@ BASE_DIR/
         └── NHD_flowlines.geojson  # NHD hydrological network (used by OWM)
 ```
 
-`BASE_DIR` is read from the `BASE_DIR` environment variable in all notebooks and scripts (with the Azure ML path as the hardcoded fallback). Set the variable before launching Jupyter — e.g. `export BASE_DIR=/path/to/project`.
+`BASE_DIR` is read from the `BASE_DIR` environment variable in all notebooks and scripts (with an Azure ML path as the hardcoded fallback). Always set `BASE_DIR` explicitly before launching Jupyter so local clones do not silently fall back to the inaccessible Azure path — e.g. `export BASE_DIR=/path/to/project`.
 
 Normalisation statistics and the test chip list are saved to `results/unet_training/` on first run and reloaded automatically on subsequent runs — do not delete these files.
 
@@ -90,6 +90,8 @@ pip install -r requirements.txt
 ---
 
 ## Reproducing Results
+
+> Steps must be run in order. Most heavy steps are cached, so re-opening a notebook is safe and will skip already-computed outputs.
 
 ### Step 1 — Scene-level split and normalisation (run once)
 Open `unet_training_final.ipynb` and run **cells 1–3** in order. These establish the train/val/test split at scene level and compute normalisation statistics from the training set.
@@ -201,7 +203,7 @@ results/
 ---
 
 ## Notes
-- All random seeds are fixed at `SEED=42` for reproducibility.
+- Random seeds are fixed (base value 42, combined with a per-chip hash in `generate_water_masks.py`) for reproducibility.
 - The test scene list is saved to `results/unet_training/test_chips.json` and must not be changed.
 - Normalisation statistics are computed from the training set only and saved to `results/unet_training/normalisation_stats.json`.
 - The global best fold checkpoint is saved to `results/unet_training_v3/kfold/best_model.pth`.
