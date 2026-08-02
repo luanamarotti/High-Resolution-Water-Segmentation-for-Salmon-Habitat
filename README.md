@@ -26,7 +26,7 @@ All code is in Jupyter notebooks; `generate_water_masks.py` is the only standalo
 This submission bundles the source code and the result files needed to verify the reported metrics:
 
 - **Source code** — 10 Jupyter notebooks and `generate_water_masks.py` (see *File Structure*).
-- **`results/`** — result files (metric CSVs, per-fold thresholds, per-scene CSVs, scene metadata) that allow the reported numbers to be verified without re-running the pipeline.
+- **`results/`** — result files (metric CSVs, per-fold thresholds, per-scene CSVs, scene metadata) that allow the reported numbers to be verified without re-running the pipeline. Only these small verification files are bundled; the large outputs (probability maps, prediction masks, model checkpoints) regenerate on run — see *Results Directory Layout*.
 - **`figures/`** — the final figures used in the dissertation.
 - **`environment.yml`, `requirements.txt`** — dependency specifications (conda is authoritative; pip is a fallback).
 - **`README.md`** — this guide; **`LICENSE`** — MIT licence.
