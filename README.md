@@ -190,14 +190,10 @@ Run all cells in `unet_diagnostic_final.ipynb` in order. This notebook:
 - Analyses per-scene performance, probability distributions, and visual inspection
 - Saves `final_summary.csv` to `results/unet_diagnostic_v3/` for use in the comparison notebook
 
-> ⚠️ Requires all 5 fold checkpoints to exist before running. Run after cell 14 of `unet_training_final.ipynb` is complete.
-
 ### Step 7 — Final comparison
 Run all cells in `comparison_all_final.ipynb` in order. This notebook:
 - Loads U-Net results from `final_summary.csv`
 - Produces the final comparison table and figures across all methods: NDWI, OWM, U-Net best model, and U-Net ensemble (majority vote)
-
-> ⚠️ Cell 1b generates NDWI binary masks at t=0.35 from raw chips (~25 min, runs once). This must complete before Cell 2. The fold reconstruction uses sklearn KFold with shuffle=True, random_state=42.
 
 ### Step 8 — Figures
 Run all cells in `generate_figures.ipynb` to regenerate figures. The notebook generates seven figures (training curves, method comparison, pipeline diagram, geographic map, acquisition timeline, per-scene scatter, and qualitative examples); the dissertation uses five of these (pipeline, map, timeline, per-scene scatter, and qualitative).
