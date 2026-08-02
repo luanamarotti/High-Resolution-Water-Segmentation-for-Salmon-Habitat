@@ -30,6 +30,13 @@ Pooled micro F1 on the 4,788 held-out test chips:
 
 The dummy baselines are metric-pipeline sanity checks (see `generate_water_masks.py`), not competing methods.
 
+### Model weights
+Trained checkpoints (`fold1_best.pth`–`fold5_best.pth`, `best_model.pth`; ~100 MB each)
+exceed the 50 MB submission limit and are not included. They are available on request and
+regenerable via `unet_training_final.ipynb` (Step 5; Focal+Dice, LR=1e-4, BS=64, gradient
+clipping). The metrics above can be verified from the included result CSVs (see Results
+Directory Layout) without the weights.
+
 ---
 
 ## Data
