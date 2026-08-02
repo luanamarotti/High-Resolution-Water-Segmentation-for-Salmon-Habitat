@@ -16,6 +16,19 @@ This repository contains the supporting code for the dissertation *High-Resoluti
 
 ---
 
+## Submission Contents
+This submission bundles the source code and the result files needed to verify the reported metrics:
+
+- **Source code** — 10 Jupyter notebooks and `generate_water_masks.py` (see *File Structure*).
+- **`results/`** — result files (metric CSVs, per-fold thresholds, per-scene CSVs, scene metadata) that allow the reported numbers to be verified without re-running the pipeline.
+- **`figures/`** — the final figures used in the dissertation.
+- **`environment.yml`, `requirements.txt`** — dependency specifications (conda is authoritative; pip is a fallback).
+- **`README.md`** — this guide; **`LICENSE`** — MIT licence.
+
+Not included, due to the 50 MB size limit: the trained model weights (~100 MB each — see *Model weights*) and the raw imagery/mask dataset (see *Data*). Both are described below, and the reported results can be verified from the included result files without them.
+
+---
+
 ## Results
 Pooled micro F1 on the 4,788 held-out test chips:
 
@@ -107,8 +120,28 @@ pip install -r requirements.txt
 ├── dataset_analysis.ipynb                 # Temporal, spatial, seasonal and water fraction analysis
 │
 ├── generate_water_masks.py                # Generates dummy mask sets for sanity checks and pipeline baseline comparison
-└── generate_figures.ipynb                 # Generates dissertation figures (see note in Step 8 for which are used in the document)
+├── generate_figures.ipynb                 # Generates dissertation figures (see note in Step 8 for which are used in the document)
+│
+├── environment.yml                        # Conda environment (authoritative)
+├── requirements.txt                       # pip fallback
+├── LICENSE                                # MIT licence
+│
+├── results/                               # Result files for verification (see Results Directory Layout)
+└── figures/                               # Final dissertation figures (PNG)
 ```
+
+---
+
+## Running the Code (no standalone executable)
+This software is a set of Jupyter notebooks implementing a deep-learning research pipeline, not a standalone executable. A single executable file is not feasible because the code requires: (1) a CUDA-capable GPU, (2) the `owm` conda environment defined in `environment.yml` (PyTorch 2.3.0 + CUDA 12.1 and geospatial libraries such as rasterio/geopandas), and (3) large dataset and model-weight files that are not included due to the 50 MB submission limit.
+
+To run the code, an examiner would:
+
+1. **Create the environment:** `conda env create -f environment.yml` then `conda activate owm` (CPU/pip fallback: see `requirements.txt` and the PyTorch index-URL note in *Environment*).
+2. **Provide the data:** obtain the WorldView imagery/mask chips (not included — see *Data*) and set the `BASE_DIR` environment variable to their location.
+3. **Run the notebooks** in Jupyter in the order given in *Reproducing Results* (Steps 1–8).
+
+**Verification without re-running:** the reported metrics can be confirmed directly from the included result files (`results/` — see *Results Directory Layout*) without a GPU, the dataset, or the model weights.
 
 ---
 
