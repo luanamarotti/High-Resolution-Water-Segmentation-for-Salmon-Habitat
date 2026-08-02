@@ -14,6 +14,12 @@ This repository contains the supporting code for the dissertation *High-Resoluti
 
 **Primary metric:** Micro F1 across 4,788 held-out test chips from 13 test scenes.
 
+**Data source:** high-resolution WorldView-2/3 multispectral imagery of Pacific Northwest salmon-rearing rivers, provided by NOAA; binary ground-truth water masks were manually digitised by NOAA domain experts. The imagery is subject to its provider's licensing and is not redistributed here.
+
+> **Verifying the results without a GPU:** all headline metrics can be confirmed directly from the CSV files in `results/` — no GPU, dataset, or model weights required. See *Running the Code* and *Results Directory Layout*.
+
+All code is in Jupyter notebooks; `generate_water_masks.py` is the only standalone script.
+
 ---
 
 ## Submission Contents
@@ -41,7 +47,7 @@ Pooled micro F1 on the 4,788 held-out test chips:
 | Dummy 100% water (baseline) | 0.0472 | 0.0242 | 1.0000 |
 | Dummy 0% water (baseline) | 0.0000 | 0.0000 | 0.0000 |
 
-The dummy baselines are metric-pipeline sanity checks (see `generate_water_masks.py`), not competing methods.
+The dummy baselines are metric-pipeline sanity checks (see `generate_water_masks.py`), not competing methods. Seven dummy mask sets were generated (0–100% water fraction); only the 0% and 100% cases are reported here as pipeline sanity checks.
 
 ### Model weights
 Trained checkpoints (`fold1_best.pth`–`fold5_best.pth`, `best_model.pth`; ~100 MB each)
