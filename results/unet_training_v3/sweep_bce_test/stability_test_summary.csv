@@ -1,0 +1,2 @@
+config,lr,wd,loss,bs,best_val_loss,best_val_f1
+Ctest_lr4e4_wd1e3_bce,0.0004,0.001,bce,32,0.0361,0.7305
